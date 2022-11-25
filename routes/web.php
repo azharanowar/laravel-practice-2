@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,4 @@ use App\Http\Controllers\HomeController;
 //});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/add-blog', [BlogController::class, 'addBlog'])->name('add-blog');
