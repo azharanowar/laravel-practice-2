@@ -8,37 +8,29 @@
 
     <div class="container">
         <div class="row py-5">
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-12 mx-auto">
                 <h4 class="text-center text-uppercase">Manage Blog</h4>
                 <p class="text-muted text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis deleniti, harum iusto magni optio quae ratione reprehenderit tempora. Molestiae, voluptas?</p>
-                <table class="table table-dark table-striped table-hover">
+                <table class="table table-bordered table-striped table-hover">
                     <thead>
-                    <tr>
-                        <th scope="col">SL</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
+                        <tr class="text-center">
+                            <th scope="col">SL</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Description</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>@twitter</td>
-                        <td>@twitter</td>
-                        <td>@twitter</td>
-                    </tr>
+                        @foreach($blogs as $blog)
+                            <tr>
+                                <th scope="row">{{ $blog['id'] }}</th>
+                                <td>{{ $blog['title'] }}</td>
+                                <td>{{ $blog['category'] }}</td>
+                                <td>{{ $blog['author'] }}</td>
+                                <td>{{ $blog['description'] }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

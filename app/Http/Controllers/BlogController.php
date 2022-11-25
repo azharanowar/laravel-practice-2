@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Blog;
 
 class BlogController extends Controller
 {
@@ -11,6 +12,6 @@ class BlogController extends Controller
     }
 
     public function manageBlog() {
-        return view('blog.manage-blog');
+        return view('blog.manage-blog', ['blogs' => Blog::getAllBlog()]);
     }
 }
