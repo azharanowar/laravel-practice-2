@@ -1,10 +1,13 @@
 @extends('master')
 
 @section('title')
-    Home
+    Add Blog
 @endsection()
 
-
 @section('main-content')
-    <h2>Hello from home page</h2>
+
+    <div class="container">
+        <div class="row"></div>
+    </div>
+
 @endsection()
