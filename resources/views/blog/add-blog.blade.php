@@ -25,12 +25,12 @@
                             <div class="row mb-3">
                                 <label for="blogCategory" class="col-sm-2 col-form-label">Category </label>
                                 <div class="col-sm-10">
-                                    <select name="blog_category" id="blogCategory" class="form-select">
-                                        <option value="">Select your category</option>
-                                        <option value="">National</option>
-                                        <option value="">International</option>
-                                        <option value="">Economy</option>
-                                        <option value="">Technology</option>
+                                    <select name="blog_category_id" id="blogCategory" class="form-select">
+                                        <option value="0">Select your category</option>
+                                        <option value="1">National</option>
+                                        <option value="2">International</option>
+                                        <option value="3">Economy</option>
+                                        <option value="4">Technology</option>
                                     </select>
                                 </div>
                             </div>
@@ -50,13 +50,13 @@
                                 <legend class="col-form-label col-sm-2 pt-0">Publication Status</legend>
                                 <div class="col-sm-10">
                                     <div class="form-check">
-                                        <input name="blog_publication_status" class="form-check-input" type="radio" id="publicationStatus1" value="0" checked>
+                                        <input name="blog_publication_status" class="form-check-input" type="radio" id="publicationStatus1" value="1" checked>
                                         <label class="form-check-label" for="publicationStatus1">
                                             Published
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input name="blog_publication_status" class="form-check-input" type="radio" id="publicationStatus2" value="1">
+                                        <input name="blog_publication_status" class="form-check-input" type="radio" id="publicationStatus2" value="0">
                                         <label class="form-check-label" for="publicationStatus2">
                                             Unpublished
                                         </label>
