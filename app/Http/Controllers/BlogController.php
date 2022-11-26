@@ -7,7 +7,7 @@ use App\Models\Blog;
 
 class BlogController extends Controller
 {
-    public $blog;
+    public $blog, $image, $imageNewName, $directory, $imageURL;
 
     public function addBlog() {
         return view('blog.add-blog');
@@ -19,6 +19,19 @@ class BlogController extends Controller
 
     public function saveNewBlog(Request $request) {
 
+        $this->image = $request->file('blog_image');
+
+        $this->imageNewName = rand() . '.' . $this->image->getClientOriginalExtension();
+        $this->directory = 'assets/images/';
+        $this->imageURL = $this->directory . $this->imageNewName;
+
+        $this->image->move($this->directory, $this->imageNewName);
+
+//        $this->imageNewName = $this->image->getClientOriginalExtension();
+
+//        return $this->imageNewName;
+//        $this->directory = $this->image->
+
         $this->blog = new Blog();
 
         $this->blog->title = $request->blog_title;
@@ -26,7 +39,7 @@ class BlogController extends Controller
         $this->blog->author = $request->blog_author;
         $this->blog->description = $request->blog_description;
         $this->blog->publication_status = $request->blog_publication_status;
-        $this->blog->image = $request->blog_image;
+        $this->blog->image = $this->imageURL;
 
         $this->blog->save();
 
