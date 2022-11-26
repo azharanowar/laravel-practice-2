@@ -14,4 +14,8 @@ class BlogController extends Controller
     public function manageBlog() {
         return view('blog.manage-blog', ['blogs' => Blog::getAllBlog()]);
     }
+
+    public function saveNewBlog() {
+
+    }
 }
