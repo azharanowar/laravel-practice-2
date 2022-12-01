@@ -21,6 +21,7 @@
                             <th scope="col">Description</th>
                             <th scope="col">Publication Status</th>
                             <th scope="col">Image</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,8 +32,23 @@
                                 <td>{{ $blog['category_id'] }}</td>
                                 <td>{{ $blog['author'] }}</td>
                                 <td>{{ $blog['description'] }}</td>
-                                <td>{{ $blog['publication_status'] == 1 ? "Published" : "Unpublished" }}</td>
                                 <td width="100"><img class="img-fluid rounded-1" src="{{ asset('/') . $blog['image'] }}" alt=""/></td>
+                                <td class="py-3">
+                                    <div class="mt-1">
+                                        <form action="" method="">
+                                            <strong>{{ $blog['publication_status'] == 1 ? "Published" : "Unpublished" }}</strong>
+                                            <button type="button" class="btn btn-outline-secondary w-100 mt-2">Change</button>
+                                        </form>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mt-1">
+                                        <form action="" method="">
+                                            <button type="button" class="btn btn-success w-100 mt-2">Update</button>
+                                            <button type="button" class="btn btn-danger w-100 mt-2">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
