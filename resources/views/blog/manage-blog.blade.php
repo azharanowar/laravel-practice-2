@@ -19,6 +19,8 @@
                             <th scope="col">Category</th>
                             <th scope="col">Author</th>
                             <th scope="col">Description</th>
+                            <th scope="col">Publication Status</th>
+                            <th scope="col">Image</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,9 +28,11 @@
                             <tr>
                                 <th scope="row">{{ $blog['id'] }}</th>
                                 <td>{{ $blog['title'] }}</td>
-                                <td>{{ $blog['category'] }}</td>
+                                <td>{{ $blog['category_id'] }}</td>
                                 <td>{{ $blog['author'] }}</td>
                                 <td>{{ $blog['description'] }}</td>
+                                <td>{{ $blog['publication_status'] == 1 ? "Published" : "Unpublished" }}</td>
+                                <td width="100"><img class="img-fluid rounded-1" src="{{ asset('/') . $blog['image'] }}" alt=""/></td>
                             </tr>
                         @endforeach
                     </tbody>

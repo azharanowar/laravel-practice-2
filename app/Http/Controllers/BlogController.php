@@ -14,7 +14,7 @@ class BlogController extends Controller
     }
 
     public function manageBlog() {
-        return view('blog.manage-blog', ['blogs' => Blog::getAllBlog()]);
+        return view('blog.manage-blog', ['blogs' => Blog::all()]);
     }
 
     public function saveNewBlog(Request $request) {
@@ -27,13 +27,7 @@ class BlogController extends Controller
 
         $this->image->move($this->directory, $this->imageNewName);
 
-//        $this->imageNewName = $this->image->getClientOriginalExtension();
-
-//        return $this->imageNewName;
-//        $this->directory = $this->image->
-
         $this->blog = new Blog();
-
         $this->blog->title = $request->blog_title;
         $this->blog->category_id = $request->blog_category_id;
         $this->blog->author = $request->blog_author;
