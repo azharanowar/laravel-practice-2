@@ -7,7 +7,7 @@ use App\Models\Blog;
 
 class BlogController extends Controller
 {
-    public $blog, $image, $imageNewName, $directory, $imageURL;
+    public $blog, $image, $imageNewName, $directory, $imageURL, $message;
 
     public function addBlog() {
         return view('blog.add-blog');
@@ -38,5 +38,13 @@ class BlogController extends Controller
         $this->blog->save();
 
         return back();
+    }
+
+    public function updatePublicationStatus($id) {
+
+        $this->blog = new Blog();
+        $this->message = $this->blog->changeBlogPublicationStatusById($id);
+
+        return back()->with($this->message);
     }
 }

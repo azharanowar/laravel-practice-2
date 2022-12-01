@@ -9,8 +9,13 @@
     <div class="container">
         <div class="row py-5">
             <div class="col-md-12 mx-auto">
-                <h4 class="text-center text-uppercase">Manage Blog</h4>
+                <h3 class="text-center text-uppercase">Manage Blog</h3>
                 <p class="text-muted text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis deleniti, harum iusto magni optio quae ratione reprehenderit tempora. Molestiae, voluptas?</p>
+
+                @if(session('message'))
+                    <h5 class="text-{{ session('warningType') }} text-center py-4">{{ session('message') }}</h5>
+                @endif
+
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                         <tr class="text-center">
@@ -35,9 +40,10 @@
                                 <td width="100"><img class="img-fluid rounded-1" src="{{ asset('/') . $blog['image'] }}" alt=""/></td>
                                 <td class="py-3">
                                     <div class="mt-1">
-                                        <form action="" method="">
+                                        <form action="{{ route('change-publication-status', ['id' => $blog['id']]) }}" method="POST">
+                                            @csrf
                                             <strong>{{ $blog['publication_status'] == 1 ? "Published" : "Unpublished" }}</strong>
-                                            <button type="button" class="btn btn-outline-secondary w-100 mt-2">Change</button>
+                                            <button type="submit" class="btn btn-secondary w-100 mt-2">Change</button>
                                         </form>
                                     </div>
                                 </td>

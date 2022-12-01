@@ -25,3 +25,4 @@ Route::get('/add-blog', [BlogController::class, 'addBlog'])->name('add-blog');
 Route::get('/manage-blog', [BlogController::class, 'manageBlog'])->name('manage-blog');
 
 Route::post('new-blog', [BlogController::class, 'saveNewBlog'])->name('new-blog');
+Route::post('change-publication-status/{id}', [BlogController::class, 'updatePublicationStatus'])->name('change-publication-status');
