@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Faker\Core\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,16 @@ class Blog extends Model
     }
 
     public function deleteBlogById($id) {
-        $this->blog = DB::table('blogs')->delete($id);
+        $this->blog = DB::table('blogs')->find($id);
+
+        $imagePath = $this->blog->image;
+
+        echo asset('/') . $imagePath;
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        DB::table('blogs')->delete($id);
 
         return ['message' => "Blog successfully deleted", 'warningType' => 'danger'];
     }
