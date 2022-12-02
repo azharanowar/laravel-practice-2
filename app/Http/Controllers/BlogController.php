@@ -47,4 +47,11 @@ class BlogController extends Controller
 
         return back()->with($this->message);
     }
+
+    public function deleteBlog($id) {
+        $this->blog = new  Blog();
+        $message = $this->blog->deleteBlogById($id);
+
+        return back()->with($message);
+    }
 }

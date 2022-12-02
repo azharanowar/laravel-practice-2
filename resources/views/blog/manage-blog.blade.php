@@ -49,9 +49,11 @@
                                 </td>
                                 <td>
                                     <div class="my-1">
-                                        <form action="" method="">
-                                            <button type="button" class="btn btn-success w-100 mt-2">Update</button>
-                                            <button type="button" class="btn btn-danger w-100 mt-2">Delete</button>
+                                        <button type="button" class="btn btn-success w-100 mt-2">Update</button>
+
+                                        <form action="{{ route('delete-blog', ['id' => $blog['id']]) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger w-100 mt-2" onclick="return confirm('Are you sure to delete this blog!!!')">Delete</button>
                                         </form>
                                     </div>
                                 </td>

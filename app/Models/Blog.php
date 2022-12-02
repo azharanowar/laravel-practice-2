@@ -29,4 +29,10 @@ class Blog extends Model
 
         return $this->message;
     }
+
+    public function deleteBlogById($id) {
+        $this->blog = DB::table('blogs')->delete($id);
+
+        return ['message' => "Blog successfully deleted", 'warningType' => 'danger'];
+    }
 }
