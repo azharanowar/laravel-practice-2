@@ -13,7 +13,7 @@
                 <p class="text-muted text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis deleniti, harum iusto magni optio quae ratione reprehenderit tempora. Molestiae, voluptas?</p>
 
                 @if(session('message'))
-                    <h5 class="text-{{ session('warningType') }} text-center py-4">{{ session('message') }}</h5>
+                    <h5 class="text-{{ session('warningType') }} text-center py-3">{{ session('message') }}</h5>
                 @endif
 
                 <table class="table table-bordered table-striped table-hover">
@@ -30,9 +30,14 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        @php
+                            $i = 1;
+                        @endphp
+
                         @foreach($blogs as $blog)
                             <tr>
-                                <th scope="row">{{ $blog['id'] }}</th>
+                                <th scope="row">{{ $i++ }}</th>
                                 <td width="180">{{ $blog['title'] }}</td>
                                 <td>{{ $blog['category_id'] }}</td>
                                 <td width="140">{{ $blog['author'] }}</td>
