@@ -18,7 +18,7 @@
 
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
-                        <tr class="text-center">
+                        <tr class="text-center" valign="middle">
                             <th scope="col">SL</th>
                             <th scope="col">Title</th>
                             <th scope="col">Category</th>
@@ -33,11 +33,11 @@
                         @foreach($blogs as $blog)
                             <tr>
                                 <th scope="row">{{ $blog['id'] }}</th>
-                                <td>{{ $blog['title'] }}</td>
+                                <td width="180">{{ $blog['title'] }}</td>
                                 <td>{{ $blog['category_id'] }}</td>
-                                <td>{{ $blog['author'] }}</td>
-                                <td>{{ $blog['description'] }}</td>
-                                <td width="100"><img class="img-fluid rounded-1" src="{{ asset('/') . $blog['image'] }}" alt=""/></td>
+                                <td width="140">{{ $blog['author'] }}</td>
+                                <td>{{ substr($blog['description'], 0, 100) }}...</td>
+                                <td width="120"><img class="img-fluid rounded-1" src="{{ asset('/') . $blog['image'] }}" alt=""/></td>
                                 <td class="py-3">
                                     <div class="mt-1">
                                         <form action="{{ route('change-publication-status', ['id' => $blog['id']]) }}" method="POST">
@@ -48,7 +48,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="mt-1">
+                                    <div class="my-1">
                                         <form action="" method="">
                                             <button type="button" class="btn btn-success w-100 mt-2">Update</button>
                                             <button type="button" class="btn btn-danger w-100 mt-2">Delete</button>
