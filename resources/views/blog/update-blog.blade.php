@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('title')
-    Add Blog
+    Update Blog
 @endsection()
 
 @section('main-content')
@@ -14,39 +14,41 @@
                         <h4 class="fw-normal text-muted text-center">Add new blog</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('new-blog') }}" method="POST" enctype="multipart/form-data">
+                        <form action="" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
                                 <label for="blogTitle" class="col-sm-2 col-form-label">Title </label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="blog_title" class="form-control" id="blogTitle" placeholder="Enter your blog title here...">
+                                    <input type="text" name="blog_title" class="form-control" id="blogTitle" placeholder="Enter your blog title here..." value="{{ $blog['title'] }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="blogCategory" class="col-sm-2 col-form-label">Category </label>
                                 <div class="col-sm-10">
                                     <select name="blog_category_id" id="blogCategory" class="form-select">
-                                        <option value="0">Select your category</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{ $category['id'] }}">{{ $category['category_name'] }}</option>
-                                        @endforeach
+                                        <option value="{{ $blog['category_id'] }}">{{ $blog['category_id'] }}</option>
+                                        <option value="1">National</option>
+                                        <option value="2">International</option>
+                                        <option value="3">Economy</option>
+                                        <option value="4">Technology</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="blogAuthor" class="col-sm-2 col-form-label">Author </label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="blog_author" class="form-control" id="blogAuthor" placeholder="Enter your blog author name here...">
+                                    <input type="text" name="blog_author" class="form-control" id="blogAuthor" placeholder="Enter your blog author name here..." value="{{ $blog['author'] }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="blogDescription" class="col-sm-2 col-form-label">Description </label>
                                 <div class="col-sm-10">
-                                    <textarea type="text" name="blog_description" class="form-control" id="blogDescription" rows="6" placeholder="Enter your blog description here..."></textarea>
+                                    <textarea type="text" name="blog_description" class="form-control" id="blogDescription" rows="6" placeholder="Enter your blog description here...">{{ $blog['description'] }}</textarea>
                                 </div>
                             </div>
                             <fieldset class="row mb-3">
                                 <legend class="col-form-label col-sm-2 pt-0">Publication Status</legend>
+                                {{ $blog['publication_status'] }}
                                 <div class="col-sm-10">
                                     <div class="form-check">
                                         <input name="blog_publication_status" class="form-check-input" type="radio" id="publicationStatus1" value="1" checked>
@@ -65,7 +67,8 @@
                             <div class="row mb-3">
                                 <label for="blogImage" class="col-sm-2 col-form-label">Image </label>
                                 <div class="col-sm-10">
-                                    <input name="blog_image" type="file" class="form-control" id="blogImage" accept="image/*">
+                                    <img src="{{ asset($blog['image']) }}" class="img-fluid w-25 py-3"/>
+                                    <input name="blog_image" type="file" class="form-control" id="blogImage" accept="image/*" value="{{ $blog[''] }}">
                                 </div>
                             </div>
                             <div class="row mb-3">

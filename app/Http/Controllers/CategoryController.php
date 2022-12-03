@@ -16,4 +16,12 @@ class CategoryController extends Controller
 
         return back()->with(['message' => 'New category created successfully.', 'messageType' => 'success']);
     }
+
+    public static function manageCategory() {
+        return view('category.manage-category', [
+            'categories' => Category::all(),
+        ]);
+
+
+    }
 }

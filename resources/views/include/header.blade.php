@@ -35,6 +35,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('create-category') }}">Create Category</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('manage-category') }}">Manage Category</a>
+                                </li>
                             </ul>
                             <form class="d-flex" role="search">
                                 <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">

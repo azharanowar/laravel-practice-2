@@ -11,30 +11,30 @@ class Blog extends Model
 {
     use HasFactory;
 
-    public $blog, $matchedBlog, $message;
+    public static $blog, $matchedBlog, $message;
 
     public function changeBlogPublicationStatusById($id) {
-        $this->blog = new Blog();
-        $this->matchedBlog = $this->blog::find($id);
+        self::$blog = new Blog();
+        self::$matchedBlog = self::$blog::find($id);
 
-        if ($this->matchedBlog->publication_status == 0) {
-            $this->matchedBlog->publication_status = 1;
+        if (self::$matchedBlog->publication_status == 0) {
+            self::$matchedBlog->publication_status = 1;
 
-            $this->message = ['message' => 'Publication status successfully changed to published', 'warningType' => 'success'];
+            self::$message = ['message' => 'Publication status successfully changed to published', 'warningType' => 'success'];
         } else {
-            $this->matchedBlog->publication_status = 0;
+            self::$matchedBlog->publication_status = 0;
 
-            $this->message = ['message' => 'Publication status successfully changed to unpublished', 'warningType' => 'danger'];
+            self::$message = ['message' => 'Publication status successfully changed to unpublished', 'warningType' => 'danger'];
         }
-        $this->matchedBlog->save();
+        self::$matchedBlog->save();
 
-        return $this->message;
+        return self::$message;
     }
 
     public function deleteBlogById($id) {
-        $this->blog = DB::table('blogs')->find($id);
+        self::$blog = DB::table('blogs')->find($id);
 
-        $imagePath = $this->blog->image;
+        $imagePath = self::$blog->image;
 
         echo asset('/') . $imagePath;
         if (file_exists($imagePath)) {
@@ -44,5 +44,11 @@ class Blog extends Model
         DB::table('blogs')->delete($id);
 
         return ['message' => "Blog successfully deleted", 'warningType' => 'danger'];
+    }
+
+    public static function updateBlogInfo($id) {
+        self::$blog = self::find($id);
+
+        return self::$blog;
     }
 }
