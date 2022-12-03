@@ -45,9 +45,10 @@
                                 <td width="120"><img class="img-fluid rounded-1" src="{{ asset('/') . $blog['image'] }}" alt=""/></td>
                                 <td class="py-3">
                                     <div class="mt-1">
-                                        <form action="{{ route('change-publication-status', ['id' => $blog['id']]) }}" method="POST">
+                                        <form action="{{ route('change-publication-status') }}" method="POST">
                                             @csrf
                                             <strong>{{ $blog['publication_status'] == 1 ? "Published" : "Unpublished" }}</strong>
+                                            <input type="hidden" name="blog_id" value="{{ $blog['id'] }}"/>
                                             <button type="submit" class="btn btn-secondary w-100 mt-2">Change</button>
                                         </form>
                                     </div>
@@ -56,8 +57,9 @@
                                     <div class="my-1">
                                         <button type="button" class="btn btn-success w-100 mt-2">Update</button>
 
-                                        <form action="{{ route('delete-blog', ['id' => $blog['id']]) }}" method="POST">
+                                        <form action="{{ route('delete-blog') }}" method="POST">
                                             @csrf
+                                            <input type="hidden" name="blog_id" value="{{ $blog['id'] }}"/>
                                             <button type="submit" class="btn btn-danger w-100 mt-2" onclick="return confirm('Are you sure to delete this blog!!!')">Delete</button>
                                         </form>
                                     </div>

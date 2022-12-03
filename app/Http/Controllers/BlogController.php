@@ -40,17 +40,17 @@ class BlogController extends Controller
         return back();
     }
 
-    public function updatePublicationStatus($id) {
+    public function updatePublicationStatus(Request $request) {
 
         $this->blog = new Blog();
-        $this->message = $this->blog->changeBlogPublicationStatusById($id);
+        $this->message = $this->blog->changeBlogPublicationStatusById($request['blog_id']);
 
         return back()->with($this->message);
     }
 
-    public function deleteBlog($id) {
+    public function deleteBlog(Request $request) {
         $this->blog = new  Blog();
-        $message = $this->blog->deleteBlogById($id);
+        $message = $this->blog->deleteBlogById($request['blog_id']);
 
         return back()->with($message);
     }
