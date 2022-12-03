@@ -26,4 +26,6 @@ Route::get('/manage-blog', [BlogController::class, 'manageBlog'])->name('manage-
 
 Route::post('new-blog', [BlogController::class, 'saveNewBlog'])->name('new-blog');
 Route::post('change-publication-status', [BlogController::class, 'updatePublicationStatus'])->name('change-publication-status');
-Route::post('delete-blog/', [BlogController::class, 'deleteBlog'])->name('delete-blog');
+Route::post('delete-blog', [BlogController::class, 'deleteBlog'])->name('delete-blog');
+
+Route::get('/new-category', [CategoryController::class, 'createNewCategory'])->name('create-category');
