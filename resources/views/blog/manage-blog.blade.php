@@ -13,7 +13,7 @@
                 <p class="text-muted text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis deleniti, harum iusto magni optio quae ratione reprehenderit tempora. Molestiae, voluptas?</p>
 
                 @if(session('message'))
-                    <h5 class="text-{{ session('warningType') }} text-center py-3">{{ session('message') }}</h5>
+                    <h5 class="text-{{ session('messageType') }} text-center py-3">{{ session('message') }}</h5>
                 @endif
 
                 <table class="table table-bordered table-striped table-hover">
@@ -55,7 +55,12 @@
                                 </td>
                                 <td>
                                     <div class="my-1">
-                                        <button type="button" class="btn btn-success w-100 mt-2">Update</button>
+
+                                        <form action="{{ route('update-blog') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="blog_id" value="{{ $blog['id'] }}"/>
+                                            <button type="submit" class="btn btn-success w-100 mt-2">Update</button>
+                                        </form>
 
                                         <form action="{{ route('delete-blog') }}" method="POST">
                                             @csrf
