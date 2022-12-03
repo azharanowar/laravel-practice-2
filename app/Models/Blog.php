@@ -11,7 +11,29 @@ class Blog extends Model
 {
     use HasFactory;
 
-    public static $blog, $matchedBlog, $message;
+    public static $blog, $matchedBlog, $message, $image, $imageNewName, $directory, $imageURL;
+
+    public static function saveNewBlog($blogData) {
+        self::$image = $blogData->file('blog_image');
+        self::saveImage();
+
+        self::$blog = new Blog();
+        self::$blog->title = $blogData->blog_title;
+        self::$blog->category_id = $blogData->blog_category_id;
+        self::$blog->author = $blogData->blog_author;
+        self::$blog->description = $blogData->blog_description;
+        self::$blog->publication_status = $blogData->blog_publication_status;
+        self::$blog->image = self::$imageURL;
+
+        self::$blog->save();
+    }
+
+    public static function saveImage() {
+        self::$imageNewName = rand() . '.' . self::$image->getClientOriginalExtension();
+        self::$directory = 'assets/images/';
+        self::$imageURL = self::$directory . self::$imageNewName;
+        self::$image->move(self::$directory, self::$imageNewName);
+    }
 
     public function changeBlogPublicationStatusById($id) {
         self::$blog = new Blog();
@@ -35,8 +57,6 @@ class Blog extends Model
         self::$blog = DB::table('blogs')->find($id);
 
         $imagePath = self::$blog->image;
-
-        echo asset('/') . $imagePath;
         if (file_exists($imagePath)) {
             unlink($imagePath);
         }
@@ -46,9 +66,25 @@ class Blog extends Model
         return ['message' => "Blog successfully deleted", 'warningType' => 'danger'];
     }
 
-    public static function updateBlogInfo($id) {
-        self::$blog = self::find($id);
+    public static function saveUpdatedBlogInfo($updateBlogData) {
+        self::$blog = new Blog();
+        self::$blog = self::$blog::find($updateBlogData['blog_id']);
 
-        return self::$blog;
+        print_r($updateBlogData);
+//        self::updateImage($updateBlogData['image']);
+
+        return;
+
+        self::$blog['title'] = $updateBlogData['blog_title'];
+        self::$blog['category_id'] = $updateBlogData['blog_category_id'];
+        self::$blog['author'] = $updateBlogData['blog_author'];
+        self::$blog['description'] = $updateBlogData['blog_description'];
+        self::$blog['publication_status'] = $updateBlogData['blog_publication_status'];
+    }
+
+    public static function updateImage($existingImage) {
+        echo $existingImage;
+        if (file_exists($existingImage)) {
+        }
     }
 }
