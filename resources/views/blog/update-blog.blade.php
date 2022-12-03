@@ -14,7 +14,7 @@
                         <h4 class="fw-normal text-muted text-center">Add new blog</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('save-updated-blog') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('save-updated-blog') }}" method="POST" enctype="multipart/form-data" name="updateForm">
                             @csrf
                             <div class="row mb-3">
                                 <label for="blogTitle" class="col-sm-2 col-form-label">Title </label>
@@ -27,7 +27,7 @@
                                 <div class="col-sm-10">
                                     <select name="blog_category_id" id="blogCategory" class="form-select">
                                         @foreach($categories as $category)
-                                            <option value="{{ $category->id }}" {{ $category->id == $blog->category_id ? 'selected' : '' }}>{{ $category->category_name }}</option>
+                                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -81,5 +81,9 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.forms['updateForm'].elements['blog_category_id'].value = '{{ $blog->category_id }}'
+    </script>
 
 @endsection()
