@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
-    public static $blog, $image, $imageNewName, $directory, $imageURL, $message;
-    public $blogs;
+    public static $blog, $blogs, $image, $imageNewName, $directory, $imageURL, $message;
 
     public function addBlog() {
         return view('blog.add-blog', [
@@ -18,15 +17,15 @@ class BlogController extends Controller
         ]);
     }
 
-    public function manageBlog() {
-        $this->blogs = DB::table('blogs')
+    public static function manageBlog() {
+        self::$blogs = DB::table('blogs')
             ->join('categories', 'blogs.category_id', 'categories.id')
             ->select('blogs.*', 'categories.category_name')
             ->get();
 
         return view('blog.manage-blog',
             [
-                'blogs'         => $this->blogs,
+                'blogs'         => self::$blogs,
             ]
         );
     }
@@ -64,6 +63,6 @@ class BlogController extends Controller
     public static function saveUpdateBlogInfo(Request $request) {
         Blog::saveUpdatedBlogInfo($request);
 
-        return back()->with(['message' => "Blog successfully updated", 'warningType' => 'success']);
+        return self::manageBlog();
     }
 }
