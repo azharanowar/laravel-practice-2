@@ -11,11 +11,11 @@ class Blog extends Model
 {
     use HasFactory;
 
-    public static $blog, $matchedBlog, $message, $image, $imageNewName, $directory, $imageURL;
+    public static $blog, $matchedBlog, $message, $image, $imageNewName, $directory, $imageURL, $oldImage, $newImage;
 
     public static function saveNewBlog($blogData) {
         self::$image = $blogData->file('blog_image');
-        self::saveImage();
+        self::saveImage(self::$image);
 
         self::$blog = new Blog();
         self::$blog->title = $blogData->blog_title;
@@ -28,11 +28,11 @@ class Blog extends Model
         self::$blog->save();
     }
 
-    public static function saveImage() {
-        self::$imageNewName = rand() . '.' . self::$image->getClientOriginalExtension();
+    public static function saveImage($image) {
+        self::$imageNewName = rand() . '.' . $image->getClientOriginalExtension();
         self::$directory = 'assets/images/';
         self::$imageURL = self::$directory . self::$imageNewName;
-        self::$image->move(self::$directory, self::$imageNewName);
+        $image->move(self::$directory, self::$imageNewName);
     }
 
     public function changeBlogPublicationStatusById($id) {
@@ -70,21 +70,29 @@ class Blog extends Model
         self::$blog = new Blog();
         self::$blog = self::$blog::find($updateBlogData['blog_id']);
 
-        print_r($updateBlogData);
-//        self::updateImage($updateBlogData['image']);
+        self::$oldImage = self::$blog['image'];
+        self::$newImage = $updateBlogData->file('blog_image');
 
-        return;
+        self::updateImage(self::$oldImage, self::$newImage);
 
         self::$blog['title'] = $updateBlogData['blog_title'];
         self::$blog['category_id'] = $updateBlogData['blog_category_id'];
         self::$blog['author'] = $updateBlogData['blog_author'];
-        self::$blog['description'] = $updateBlogData['blog_description'];
         self::$blog['publication_status'] = $updateBlogData['blog_publication_status'];
+        self::$blog['description'] = $updateBlogData['blog_description'];
+        self::$blog['image'] = self::$imageURL;
+
+        self::$blog->save();
     }
 
-    public static function updateImage($existingImage) {
-        echo $existingImage;
-        if (file_exists($existingImage)) {
+    public static function updateImage($oldImage, $newImage) {
+        self::$imageNewName = rand() . '.' . $newImage->getClientOriginalExtension();
+        self::$directory = 'assets/images/';
+        self::$imageURL = self::$directory . self::$imageNewName;
+        self::$newImage->move(self::$directory, self::$imageNewName);
+
+        if (file_exists($oldImage)) {
+            unlink($oldImage);
         }
     }
 }

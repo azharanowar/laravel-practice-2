@@ -63,5 +63,7 @@ class BlogController extends Controller
 
     public static function saveUpdateBlogInfo(Request $request) {
         Blog::saveUpdatedBlogInfo($request);
+
+        return back()->with(['message' => "Blog successfully updated", 'warningType' => 'success']);
     }
 }
